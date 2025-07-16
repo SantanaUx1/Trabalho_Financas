@@ -70,13 +70,11 @@ const ListaTransacoes = ({ transacoes, carregando, onEditar, onExcluir }: Props)
     const matchCategoria = filtros.categoria === 'todas' || transacao.categoria === filtros.categoria;
     const matchBusca = filtros.busca === '' ||
       transacao.descricao.toLowerCase().includes(filtros.busca.toLowerCase());
-
     const matchDataUnica =
       filtros.dataUnica === '' ||
       (() => {
         const dataInput = new Date(filtros.dataUnica);
         const dataTransacao = new Date(transacao.data.seconds * 1000);
-
         return (
           dataTransacao.getFullYear() === dataInput.getFullYear() &&
           dataTransacao.getMonth() === dataInput.getMonth() &&
@@ -120,14 +118,13 @@ const ListaTransacoes = ({ transacoes, carregando, onEditar, onExcluir }: Props)
         <h2 className="text-xl font-semibold text-gray-800">Suas Transações</h2>
       </div>
 
-      {/* Filtros */}
       <motion.div 
         className="mb-6 p-4 bg-gray-50 rounded-lg"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.2 }}
       >
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Tipo</label>
             <select
@@ -188,7 +185,6 @@ const ListaTransacoes = ({ transacoes, carregando, onEditar, onExcluir }: Props)
         </div>
       </motion.div>
 
-      {/* Lista de transações */}
       {transacoesFiltradas.length === 0 ? (
         <motion.div 
           className="text-center py-12 text-gray-500"
@@ -203,7 +199,7 @@ const ListaTransacoes = ({ transacoes, carregando, onEditar, onExcluir }: Props)
           <p className="text-sm">Adicione uma nova transação ou ajuste os filtros</p>
         </motion.div>
       ) : (
-        <div className="space-y-3 max-h-96 overflow-y-auto">
+        <div className="space-y-3 max-h-[400px] overflow-y-auto pr-1 scrollbar-thin scrollbar-thumb-gray-300">
           <AnimatePresence>
             {transacoesFiltradas.map((transacao, index) => (
               <motion.div
@@ -212,7 +208,7 @@ const ListaTransacoes = ({ transacoes, carregando, onEditar, onExcluir }: Props)
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: 20 }}
                 transition={{ delay: index * 0.05 }}
-                className="flex items-center justify-between p-4 border rounded-lg hover:bg-gray-50 hover:shadow-md transition-all duration-200 group"
+                className="flex items-start justify-between p-4 border rounded-lg hover:bg-gray-50 hover:shadow-md transition-all duration-200 group flex-col sm:flex-row gap-3"
               >
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-1">
@@ -221,19 +217,17 @@ const ListaTransacoes = ({ transacoes, carregando, onEditar, onExcluir }: Props)
                     ) : (
                       <TrendingDown className="w-4 h-4 text-red-500" />
                     )}
-                    <h3 className="font-medium text-gray-800 group-hover:text-gray-900">
+                    <h3 className="font-medium text-gray-800 group-hover:text-gray-900 truncate max-w-[200px] sm:max-w-full">
                       {transacao.descricao}
                     </h3>
                     <span className="text-xs bg-gray-100 px-2 py-1 rounded-full">
                       {obterLabelCategoria(transacao.categoria)}
                     </span>
                   </div>
-                  <p className="text-sm text-gray-600 ml-7">
-                    {formatarData(transacao.data)}
-                  </p>
+                  <p className="text-sm text-gray-600 ml-7">{formatarData(transacao.data)}</p>
                 </div>
 
-                <div className="flex items-center gap-4">
+                <div className="flex items-center justify-between gap-4 sm:justify-end sm:items-center w-full sm:w-auto">
                   <span className={`font-semibold text-lg ${
                     transacao.tipo === 'receita' ? 'text-green-600' : 'text-red-600'
                   }`}>
@@ -244,14 +238,12 @@ const ListaTransacoes = ({ transacoes, carregando, onEditar, onExcluir }: Props)
                     <button
                       onClick={() => onEditar(transacao)}
                       className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
-                      title="Editar transação"
                     >
                       <Edit3 className="w-4 h-4" />
                     </button>
                     <button
                       onClick={() => onExcluir(transacao.id, transacao.descricao)}
                       className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-                      title="Excluir transação"
                     >
                       <Trash2 className="w-4 h-4" />
                     </button>
