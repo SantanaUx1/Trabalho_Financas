@@ -13,7 +13,7 @@ interface Props {
 
 const FormularioTransacao = ({ transacaoEditando, onSalvar, onEditar, onCancelar }: Props) => {
   const [formData, setFormData] = useState({
-    tipo: transacaoEditando?.tipo || 'despesa',
+    tipo: transacaoEditando?.tipo || 'receita',
     descricao: transacaoEditando?.descricao || '',
     valor: transacaoEditando?.valor?.toString() || '',
     categoria: transacaoEditando?.categoria || 'alimentacao',
