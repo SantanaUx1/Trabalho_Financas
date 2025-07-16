@@ -4,24 +4,24 @@ const Login = () => {
   const { entrarComGoogle, carregando } = useAuth();
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
-      <div className="card max-w-md w-full text-center">
-        <div className="mb-8">
-          <h1 className="text-3xl font-bold text-gray-800 mb-2">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center px-4 py-10">
+      <div className="bg-white shadow-2xl rounded-2xl p-8 sm:p-10 w-full max-w-md transition-all">
+        <div className="mb-6 sm:mb-8 text-center">
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-2">
             💸 Finanças Pessoais
           </h1>
-          <p className="text-gray-600">
+          <p className="text-gray-600 text-sm sm:text-base">
             Gerencie suas receitas e despesas de forma simples
           </p>
         </div>
-        
+
         <button
           onClick={entrarComGoogle}
           disabled={carregando}
-          className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-lg transition-colors flex items-center justify-center gap-3 disabled:opacity-50"
+          className="w-full bg-red-600 hover:bg-red-700 text-white font-semibold py-3 px-6 rounded-xl transition-all flex items-center justify-center gap-3 disabled:opacity-50 shadow-md hover:shadow-lg"
         >
           {carregando ? (
-            <div className="loading"></div>
+            <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
           ) : (
             <>
               <svg className="w-5 h-5" viewBox="0 0 24 24">
@@ -46,8 +46,8 @@ const Login = () => {
             </>
           )}
         </button>
-        
-        <div className="mt-6 text-sm text-gray-500">
+
+        <div className="mt-6 text-center text-sm text-gray-500">
           <p>Faça login para acessar suas finanças pessoais</p>
         </div>
       </div>
