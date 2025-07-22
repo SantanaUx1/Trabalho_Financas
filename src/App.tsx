@@ -5,6 +5,7 @@ import { useTransacoes } from './hooks/useTransacoes';
 import Login from './components/Login';
 import Header from './components/Header';
 import Dashboard from './components/Dashboard';
+import GraficoFinancas from './components/GraficoFinancas';
 import FormularioTransacao from './components/FormularioTransacao';
 import ListaTransacoes, { Transacao } from './components/ListaTransacoes';
 
